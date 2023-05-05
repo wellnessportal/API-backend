@@ -34,7 +34,7 @@ public class WaitingListService {
         return waitingListRepository.findAll();
     }
 
-    public void deleteUserFromWaitingList(String email, int event_id){
+    public void deleteUserFromWaitingList(int event_id){
         WaitingList person = getUserFromWaitingList(event_id);
 
         waitingListRepository.delete(person);

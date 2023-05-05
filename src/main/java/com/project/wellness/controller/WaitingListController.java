@@ -44,9 +44,8 @@ public class WaitingListController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @DeleteMapping(value = "/{id}/event/{eventid}")
-    public void removeUserFromWaitingList(@PathVariable String id,
-                                                            @PathVariable int eventid){
-        waitingListService.deleteUserFromWaitingList(id,eventid);
+    @DeleteMapping(value = "/{eventid}")
+    public void removeUserFromWaitingList(@PathVariable int eventid){
+        waitingListService.deleteUserFromWaitingList(eventid);
     }
 }
