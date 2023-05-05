@@ -3,7 +3,9 @@ package com.project.wellness.service;
 import com.project.wellness.model.Events;
 import com.project.wellness.model.MyEvents;
 import com.project.wellness.model.MyEvents_ID;
+import com.project.wellness.model.WaitingList;
 import com.project.wellness.repository.EventsRepository;
+import com.project.wellness.repository.WaitingListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ public class EventsService {
     private EventsRepository eventsRepository;
     private SequenceGeneratorService sequenceGenerator;
     private MyEventsService myEventsService;
+    private WaitingListRepository waitingListRepository;
     @Autowired
     public EventsService(EventsRepository eventsRepository, SequenceGeneratorService sequenceGenerator,
                          MyEventsService myEventsService) {

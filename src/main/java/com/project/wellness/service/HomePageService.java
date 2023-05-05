@@ -5,6 +5,7 @@ import com.project.wellness.model.MyEvents;
 import com.project.wellness.model.MyEvents_ID;
 import com.project.wellness.repository.EventsRepository;
 import com.project.wellness.repository.MyEventsRepository;
+import com.project.wellness.repository.WaitingListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,14 @@ import java.util.List;
 public class HomePageService {
     private MyEventsRepository myEventsRepository;
     private EventsRepository eventsRepository;
+    private EventsService eventsService;
 
     @Autowired
-    public HomePageService(MyEventsRepository myEventsRepository, EventsRepository eventsRepository) {
+    public HomePageService(MyEventsRepository myEventsRepository, EventsRepository eventsRepository,
+                           EventsService eventsService) {
         this.myEventsRepository = myEventsRepository;
         this.eventsRepository = eventsRepository;
+        this.eventsService = eventsService;
     }
 
     public List<Events> listBookedEvents(String username) {
