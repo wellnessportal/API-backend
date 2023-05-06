@@ -1,12 +1,9 @@
 package com.project.wellness.controller;
 
-import com.project.wellness.model.Events;
 import com.project.wellness.model.Users;
 import com.project.wellness.service.EventsService;
 import com.project.wellness.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,5 +36,20 @@ public class UsersController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value="/getstatus/{id}")
     public String findUserStat(@PathVariable String id){ return usersService.findUserStat(id);}
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping(value = "/increaserating/{id}")
+    public String increaseUserRating(@PathVariable String id){
+        return usersService.increaseUserRating(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping(value = "/decreaserating/{id}")
+    public String decreaseUserRating(@PathVariable String id){
+        return usersService.decreaseUserRating(id);
+    }
+
+
+
 }
 

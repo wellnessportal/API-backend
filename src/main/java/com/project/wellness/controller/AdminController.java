@@ -1,6 +1,5 @@
 package com.project.wellness.controller;
 
-import com.project.wellness.model.Events;
 import com.project.wellness.model.Users;
 import com.project.wellness.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;

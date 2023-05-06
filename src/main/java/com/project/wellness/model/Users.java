@@ -10,10 +10,12 @@ public class Users {
     @Field("_id")
     private String email_id;
     private String status;
+    private int rating;
 
-    public Users(String email_id, String status) {
+    public Users(String email_id, String status, int rating) {
         this.email_id = email_id;
         this.status = status;
+        this.rating = rating;
     }
 
     public String getEmail_id() {
@@ -30,6 +32,14 @@ public class Users {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }
 
