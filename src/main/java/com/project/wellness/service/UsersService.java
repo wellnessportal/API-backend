@@ -63,5 +63,10 @@ public class UsersService {
         usersRepository.save(user);
         return "User rating decreased by 1%";
     }
+
+    public int getUserRating(String id) {
+        Users user=usersRepository.findById(id).orElse(null);
+        return user.getRating();
+    }
 }
 

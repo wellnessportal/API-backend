@@ -49,6 +49,11 @@ public class UsersController {
         return usersService.decreaseUserRating(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping(value = "/rating/{id}")
+    public int getUserRating(@PathVariable String id){
+        return usersService.getUserRating(id);
+    }
 
 
 }
