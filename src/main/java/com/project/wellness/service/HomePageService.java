@@ -19,13 +19,15 @@ public class HomePageService {
     private MyEventsRepository myEventsRepository;
     private EventsRepository eventsRepository;
     private EventsService eventsService;
+    private UsersService usersService;
 
     @Autowired
     public HomePageService(MyEventsRepository myEventsRepository, EventsRepository eventsRepository,
-                           EventsService eventsService) {
+                           EventsService eventsService, UsersService usersService) {
         this.myEventsRepository = myEventsRepository;
         this.eventsRepository = eventsRepository;
         this.eventsService = eventsService;
+        this.usersService = usersService;
     }
 
     public List<Events> listBookedEvents(String username) {
@@ -72,6 +74,7 @@ public class HomePageService {
                 myEventsRepository.delete(myevent);
             }
         }
+        usersService.decreaseUserRating(username);
         return "Successfully cancelled event";
     }
 

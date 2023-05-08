@@ -17,14 +17,17 @@ public class WaitingListService {
     private EventsService eventsService;
     private MyEventsService myEventsService;
     private AdminService adminService;
+    private UsersService usersService;
 
     @Autowired
     public WaitingListService(WaitingListRepository waitingListRepository, EventsService eventsService,
-                              MyEventsService myEventsService, AdminService adminService) {
+                              MyEventsService myEventsService, AdminService adminService,
+                              UsersService usersService) {
         this.waitingListRepository = waitingListRepository;
         this.eventsService = eventsService;
         this.myEventsService = myEventsService;
         this.adminService = adminService;
+        this.usersService = usersService;
     }
 
     public String addUserToWaitingList(WaitingList newPerson) {
@@ -68,6 +71,7 @@ public class WaitingListService {
     public boolean addUserFromWaitingList(int eventid) {
         WaitingList person = getUserFromWaitingList(eventid);
         if(person!=null) {
+            usersService.increaseUserRating(person.getEmail_id());
             eventsService.bookEvent(person.getEmail_id(), person.getEvent_id());
             return true;
         }
