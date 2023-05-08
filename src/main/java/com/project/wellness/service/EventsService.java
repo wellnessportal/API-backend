@@ -3,7 +3,6 @@ package com.project.wellness.service;
 import com.project.wellness.model.Events;
 import com.project.wellness.model.MyEvents;
 import com.project.wellness.model.MyEvents_ID;
-import com.project.wellness.model.WaitingList;
 import com.project.wellness.repository.EventsRepository;
 import com.project.wellness.repository.WaitingListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +59,13 @@ public class EventsService {
         else {
             return "Event is fully booked. No slots available!";
         }
+    }
+
+    public boolean checkBookingPossible(int eventid) {
+         Events event = eventsRepository.findById(eventid).orElse(null);
+         if(event.getCapacity()==0){
+             return false;
+         }
+         return true;
     }
 }

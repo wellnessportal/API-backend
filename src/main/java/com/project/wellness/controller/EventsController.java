@@ -33,4 +33,10 @@ public class EventsController {
         }
         return new ResponseEntity<>(eventsList, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping(value = "/{eventid}")
+    public boolean checkBookingPossible(@PathVariable int eventid){
+        return eventsService.checkBookingPossible(eventid);
+    }
 }

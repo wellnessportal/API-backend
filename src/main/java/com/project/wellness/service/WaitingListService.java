@@ -1,33 +1,48 @@
 package com.project.wellness.service;
 
+import com.project.wellness.model.MyEvents;
+import com.project.wellness.model.Users;
 import com.project.wellness.model.WaitingList;
 import com.project.wellness.repository.WaitingListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class WaitingListService {
     private WaitingListRepository waitingListRepository;
     private EventsService eventsService;
+    private MyEventsService myEventsService;
+    private AdminService adminService;
 
     @Autowired
-    public WaitingListService(WaitingListRepository waitingListRepository, EventsService eventsService) {
+    public WaitingListService(WaitingListRepository waitingListRepository, EventsService eventsService,
+                              MyEventsService myEventsService, AdminService adminService) {
         this.waitingListRepository = waitingListRepository;
         this.eventsService = eventsService;
+        this.myEventsService = myEventsService;
+        this.adminService = adminService;
     }
 
-    public boolean addUserToWaitingList(WaitingList newPerson) {
+    public String addUserToWaitingList(WaitingList newPerson) {
         List<WaitingList> waitingList = waitingListRepository.findAll();
         for (WaitingList person : waitingList) {
-            if(person.getEmail_id()== newPerson.getEmail_id() &&
-            person.getEvent_id()==newPerson.getEvent_id()){
-                return false;
+            if(Objects.equals(person.getEmail_id(), newPerson.getEmail_id()) &&
+                    person.getEvent_id()==newPerson.getEvent_id()){
+                return "You were already added to the waiting list";
+            }
+        }
+        List<Users> usersList = adminService.listBookedUsers(newPerson.getEvent_id());
+        for (Users person: usersList) {
+            if(Objects.equals(person.getEmail_id(), newPerson.getEmail_id())){
+                return "You have already booked for this event";
             }
         }
         waitingListRepository.save(newPerson);
-        return true;
+        return "You are added to the waiting list";
     }
 
     public List<WaitingList> findAll(){
@@ -53,5 +68,9 @@ public class WaitingListService {
     public void addUserFromWaitingList(int eventid) {
         WaitingList person = getUserFromWaitingList(eventid);
         eventsService.bookEvent(person.getEmail_id(), person.getEvent_id());
+    }
+
+    public int getTotalWaitSize() {
+        return waitingListRepository.findAll().size();
     }
 }

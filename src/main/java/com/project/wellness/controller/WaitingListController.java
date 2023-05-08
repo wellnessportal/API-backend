@@ -20,11 +20,7 @@ public class WaitingListController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public String addUserToWaitingList(@RequestBody WaitingList waitingList){
-        boolean result = waitingListService.addUserToWaitingList(waitingList);
-        if(result){
-            return "Successfully added to waiting list";
-        }
-        return "User already added to waiting list";
+        return waitingListService.addUserToWaitingList(waitingList);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -48,4 +44,11 @@ public class WaitingListController {
     public void removeUserFromWaitingList(@PathVariable int eventid){
         waitingListService.deleteUserFromWaitingList(eventid);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping
+    public int getTotalWaitingSize(){
+        return waitingListService.getTotalWaitSize();
+    }
+
 }
