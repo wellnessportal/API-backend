@@ -65,9 +65,13 @@ public class WaitingListService {
         return null;
     }
 
-    public void addUserFromWaitingList(int eventid) {
+    public boolean addUserFromWaitingList(int eventid) {
         WaitingList person = getUserFromWaitingList(eventid);
-        eventsService.bookEvent(person.getEmail_id(), person.getEvent_id());
+        if(person!=null) {
+            eventsService.bookEvent(person.getEmail_id(), person.getEvent_id());
+            return true;
+        }
+        return false;
     }
 
     public int getTotalWaitSize() {

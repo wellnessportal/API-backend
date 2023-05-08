@@ -35,8 +35,8 @@ public class WaitingListController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping(value = "/{eventid}")
-    public void addUserFromWaitingList(@PathVariable int eventid){
-        waitingListService.addUserFromWaitingList(eventid);
+    public boolean addUserFromWaitingList(@PathVariable int eventid){
+        return waitingListService.addUserFromWaitingList(eventid);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
