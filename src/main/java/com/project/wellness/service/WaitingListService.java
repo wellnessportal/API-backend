@@ -39,9 +39,15 @@ public class WaitingListService {
             }
         }
         List<Users> usersList = adminService.listBookedUsers(newPerson.getEvent_id());
-        for (Users person: usersList) {
-            if(Objects.equals(person.getEmail_id(), newPerson.getEmail_id())){
-                return "You have already booked for this event";
+        if(usersList.isEmpty()){
+            waitingListRepository.save(newPerson);
+            return "You are added to the waiting list";
+        }
+        else {
+            for (Users person : usersList) {
+                if (Objects.equals(person.getEmail_id(), newPerson.getEmail_id())) {
+                    return "You have booked this event";
+                }
             }
         }
         waitingListRepository.save(newPerson);
