@@ -7,10 +7,12 @@ import com.project.wellness.model.Users;
 import com.project.wellness.repository.EventsRepository;
 import com.project.wellness.repository.MyEventsRepository;
 import com.project.wellness.repository.UsersRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -56,9 +58,21 @@ public class AdminService {
             }
         }
         if(bookedUsers.isEmpty()){
-            return null;
+            return Collections.emptyList();
         }
         return  bookedUsers;
+    }
+
+    public String getUsersAsString(int id) {
+        String res="";
+        List<Users> usersList = listBookedUsers(id);
+        if(usersList.isEmpty()){
+            return "No one has booked the event";
+        }
+        for (Users person: usersList) {
+            res=res+person.getEmail_id()+" , ";
+        }
+        return res;
     }
 }
 

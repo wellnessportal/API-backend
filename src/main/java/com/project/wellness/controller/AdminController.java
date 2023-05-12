@@ -28,9 +28,17 @@ public class AdminController {
     public ResponseEntity<List<Users>> getBookedUsers(@PathVariable int id){
         List<Users> usersList = adminService.listBookedUsers(id);
         if (usersList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
         return new ResponseEntity<>(usersList, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping(value = "/event/{id}/bookedusers")
+    public String bookedUsers(@PathVariable int id){
+        String users = adminService.getUsersAsString(id);
+        return users;
+    }
+
 }
 
