@@ -50,24 +50,24 @@ public class UsersService {
         usersRepository.deleteById(id);
     }
 
-    public String increaseUserRating(String id) {
+    public int increaseUserRating(String id) {
         Users user=usersRepository.findById(id).orElse(null);
         if(user!=null) {
             user.setRating(user.getRating() + 1);
             usersRepository.save(user);
-            return "User rating increased by 1%";
+            return user.getRating();
         }
-        return null;
+        return 0;
     }
 
-    public String decreaseUserRating(String id) {
+    public int decreaseUserRating(String id) {
         Users user=usersRepository.findById(id).orElse(null);
         if(user!=null) {
             user.setRating(user.getRating() - 1);
             usersRepository.save(user);
-            return "User rating decreased by 1%";
+            return user.getRating();
         }
-        return null;
+        return 0;
     }
 
     public int getUserRating(String id) {

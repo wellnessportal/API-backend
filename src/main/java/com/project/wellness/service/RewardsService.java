@@ -23,14 +23,16 @@ public class RewardsService {
         rewardsRepository.save(rewards);
     }
 
-    public Rewards getRandomReward(String id, int rating) {
+    public String getRandomReward(String id, int rating) {
         if(rating%5==0){
             usersService.increaseUserRating(id);
             List<Rewards> rewardsList = rewardsRepository.findAll();
             Random rand = new Random();
-            return rewardsList.get(rand.nextInt(rewardsList.size()));
+            Rewards userReward = rewardsList.get(rand.nextInt(rewardsList.size()));
+            String r = userReward.getReward();
+            return r;
         }
-        return null;
+        return "no rewards";
     }
 
     public List<Rewards> getAllRewards() {

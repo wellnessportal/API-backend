@@ -39,13 +39,13 @@ public class UsersController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping(value = "/increaserating/{id}")
-    public String increaseUserRating(@PathVariable String id){
+    public int increaseUserRating(@PathVariable String id){
         return usersService.increaseUserRating(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping(value = "/decreaserating/{id}")
-    public String decreaseUserRating(@PathVariable String id){
+    public int decreaseUserRating(@PathVariable String id){
         return usersService.decreaseUserRating(id);
     }
 
