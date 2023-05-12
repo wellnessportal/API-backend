@@ -16,13 +16,17 @@ public class EventsService {
     private EventsRepository eventsRepository;
     private SequenceGeneratorService sequenceGenerator;
     private MyEventsService myEventsService;
-    private WaitingListRepository waitingListRepository;
+    private RewardsService rewardsService;
+    private UserRewardService userRewardService;
     @Autowired
     public EventsService(EventsRepository eventsRepository, SequenceGeneratorService sequenceGenerator,
-                         MyEventsService myEventsService) {
+                         MyEventsService myEventsService, RewardsService rewardsService,
+                         UserRewardService userRewardService) {
         this.eventsRepository = eventsRepository;
         this.sequenceGenerator = sequenceGenerator;
         this.myEventsService = myEventsService;
+        this.rewardsService = rewardsService;
+        this.userRewardService = userRewardService;
     }
 
     private String makingExportLink(String sharingLink) {
@@ -54,6 +58,7 @@ public class EventsService {
             myEventsService.addNewMyEvent(
                     new MyEvents(
                             new MyEvents_ID(userid, eventid)));
+
             return "Event successfully booked!";
         }
         else {

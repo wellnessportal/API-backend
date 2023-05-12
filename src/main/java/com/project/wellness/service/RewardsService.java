@@ -2,6 +2,7 @@ package com.project.wellness.service;
 
 import com.project.wellness.model.Rewards;
 import com.project.wellness.repository.RewardsRepository;
+import com.project.wellness.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +26,13 @@ public class RewardsService {
 
     public String getRandomReward(String id, int rating) {
         if(rating%5==0){
-            usersService.increaseUserRating(id);
             List<Rewards> rewardsList = rewardsRepository.findAll();
             Random rand = new Random();
             Rewards userReward = rewardsList.get(rand.nextInt(rewardsList.size()));
             String r = userReward.getReward();
             return r;
         }
-        return "no rewards";
+        return "no";
     }
 
     public List<Rewards> getAllRewards() {

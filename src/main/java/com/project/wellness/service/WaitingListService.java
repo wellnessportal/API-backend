@@ -1,13 +1,11 @@
 package com.project.wellness.service;
 
-import com.project.wellness.model.MyEvents;
 import com.project.wellness.model.Users;
 import com.project.wellness.model.WaitingList;
 import com.project.wellness.repository.WaitingListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,19 +13,20 @@ import java.util.Objects;
 public class WaitingListService {
     private WaitingListRepository waitingListRepository;
     private EventsService eventsService;
-    private MyEventsService myEventsService;
     private AdminService adminService;
     private UsersService usersService;
+    private UserRewardService userRewardService;
+
 
     @Autowired
     public WaitingListService(WaitingListRepository waitingListRepository, EventsService eventsService,
-                              MyEventsService myEventsService, AdminService adminService,
-                              UsersService usersService) {
+                              AdminService adminService, UsersService usersService,
+                              UserRewardService userRewardService) {
         this.waitingListRepository = waitingListRepository;
         this.eventsService = eventsService;
-        this.myEventsService = myEventsService;
         this.adminService = adminService;
         this.usersService = usersService;
+        this.userRewardService = userRewardService;
     }
 
     public String addUserToWaitingList(WaitingList newPerson) {
@@ -60,8 +59,9 @@ public class WaitingListService {
 
     public void deleteUserFromWaitingList(int event_id){
         WaitingList person = getUserFromWaitingList(event_id);
-
-        waitingListRepository.delete(person);
+        if(person!=null) {
+            waitingListRepository.delete(person);
+        }
     }
 
     public WaitingList getUserFromWaitingList(int id) {
@@ -78,6 +78,7 @@ public class WaitingListService {
         WaitingList person = getUserFromWaitingList(eventid);
         if(person!=null) {
             usersService.increaseUserRating(person.getEmail_id());
+            userRewardService.addUserReward(person.getEmail_id());
             eventsService.bookEvent(person.getEmail_id(), person.getEvent_id());
             return true;
         }
