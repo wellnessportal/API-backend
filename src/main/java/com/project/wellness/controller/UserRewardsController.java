@@ -19,8 +19,8 @@ public class UserRewardsController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/{id}")
-    public void addUserReward(@PathVariable String id){
-        userRewardService.addUserReward(id);
+    public String addUserReward(@PathVariable String id){
+        return userRewardService.addUserReward(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -31,7 +31,7 @@ public class UserRewardsController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "/{id}")
-    public List<UserRewards> getUserReward(@PathVariable String id){
+    public List<UserRewards> getUserRewards(@PathVariable String id){
         return userRewardService.findUserRewards(id);
     }
 

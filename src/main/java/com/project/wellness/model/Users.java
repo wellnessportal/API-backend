@@ -13,11 +13,13 @@ public class Users {
     private String email_id;
     private String status;
     private int rating;
+    private int highestRating;
 
-    public Users(String email_id, String status, int rating) {
+    public Users(String email_id, String status, int rating, int highestRating) {
         this.email_id = email_id;
         this.status = status;
         this.rating = rating;
+        this.highestRating = highestRating;
     }
 
     public String getEmail_id() {
@@ -42,6 +44,14 @@ public class Users {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public int getHighestRating() {
+        return highestRating;
+    }
+
+    public void setHighestRating(int highestRating) {
+        this.highestRating = highestRating;
     }
 }
 

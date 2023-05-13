@@ -54,5 +54,6 @@ public class UsersController {
     public int getUserRating(@PathVariable String id){
         return usersService.getUserRating(id);
     }
+
 }
 

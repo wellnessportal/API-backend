@@ -22,9 +22,9 @@ public class RewardsController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping(value = "/{id}/{rating}")
-    public String getRandomReward(@PathVariable String id, @PathVariable int rating){
-        return rewardsService.getRandomReward(id,rating);
+    @GetMapping(value = "/{high}/{rating}")
+    public String getRandomReward(@PathVariable int high, @PathVariable int rating){
+        return rewardsService.getRandomReward(high,rating);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
