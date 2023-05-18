@@ -52,11 +52,8 @@ public class UsersService {
 
     public int increaseUserRating(String id) {
         Users user=usersRepository.findById(id).orElse(null);
-        if(user!=null) {
+        if(user!=null && user.getHighestRating()!=100) {
             user.setRating(user.getRating() + 1);
-            //if(user.getHighestRating()<=user.getRating()){
-                //user.setHighestRating(user.getRating()+1);
-           // }
             usersRepository.save(user);
             return user.getRating();
         }
