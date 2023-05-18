@@ -25,7 +25,7 @@ public class RewardsService {
     }
 
     public String getRandomReward(int high, int rating) {
-        if((rating%5==0) && (high<rating)){
+        if(((rating%5==0) && (high<rating)) || ((high==rating) && high == 100)){
             List<Rewards> rewardsList = rewardsRepository.findAll();
             Random rand = new Random();
             Rewards userReward = rewardsList.get(rand.nextInt(rewardsList.size()));
